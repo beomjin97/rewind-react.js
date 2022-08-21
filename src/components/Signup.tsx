@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
@@ -8,6 +8,7 @@ const Signup = () => {
 
   const [visiblePW, setVisiblePW] = useState<boolean>(false);
   const [visiblePWC, setVisiblePWC] = useState<boolean>(false);
+  const [userDataIsEmpty, setUserDataIsEmpty] = useState<boolean>(true);
 
   const [userData, setUserData] = useState<{
     name: string;
@@ -23,6 +24,20 @@ const Signup = () => {
     passwordConfirm: "",
   });
 
+  useEffect(() => {
+    if (
+      userData.email !== "" &&
+      userData.name !== "" &&
+      userData.password !== "" &&
+      userData.passwordConfirm !== "" &&
+      userData.userName !== ""
+    ) {
+      setUserDataIsEmpty(false);
+    } else {
+      setUserDataIsEmpty(true);
+    }
+  }, [userData]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -33,9 +48,9 @@ const Signup = () => {
         "http://localhost:5000/auth/signUp",
         userData
       );
-      console.log(res);
-    } catch (error) {
-      console.log(error);
+      //console.log(res);
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   };
 
@@ -99,8 +114,11 @@ const Signup = () => {
         />
       )}
       <button
-        className="w-[320px] h-[40px] bg-primary block mx-auto rounded font-bold text-white"
+        className={`w-[320px] h-[40px]  block mx-auto rounded font-bold text-white ${
+          userDataIsEmpty ? "bg-[#DEDEDE]" : "bg-primary"
+        }`}
         onClick={signUp}
+        disabled={userDataIsEmpty}
       >
         회원가입
       </button>
