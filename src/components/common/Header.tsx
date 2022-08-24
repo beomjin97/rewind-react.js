@@ -9,8 +9,10 @@ const Header = () => {
     }
   };
   return (
-    <div className="flex justify-between w-[100%] h-[120px] items-center border-b-[1px] border-[#00000030] px-2">
-      <div className="text-5xl font-bold w-[170px]">Rewind</div>
+    <div className="flex justify-between w-[100%] h-[10vh] lg:h-[120px] items-center border-b-[1px] border-[#00000030] box-content">
+      <a href="/" className="text-5xl font-bold w-[170px]">
+        Rewind
+      </a>
       <div className="relative hidden sm:block">
         <input
           type="text"
@@ -20,7 +22,7 @@ const Header = () => {
         />
         <BiSearch className="absolute right-2 text-2xl top-2 cursor-pointer text-primary" />
       </div>
-      <Profile />
+      <Profile inHeader={true} />
     </div>
   );
 };

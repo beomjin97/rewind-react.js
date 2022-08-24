@@ -7,7 +7,11 @@ interface user {
   _id: string;
 }
 
-const Profile = () => {
+interface props {
+  inHeader: boolean;
+}
+
+const Profile = ({ inHeader }: props) => {
   const token = localStorage.getItem("token");
   const [userData, setUserData] = useState<user>({ userName: "", _id: "" });
   const navigate = useNavigate();
@@ -21,11 +25,26 @@ const Profile = () => {
   }, [token, navigate]);
 
   return (
-    <div className="w-[170px] flex justify-between">
-      <div className="w-[40px] h-[40px] rounded-[20px] bg-primary"></div>
-      <div className="max-w-[130px] font-bold text-lg leading-10 truncate">
-        {userData.userName}
-      </div>
+    <div
+      className={`${
+        inHeader ? "w-[170px] flex-row-reverse" : ""
+      } flex mb-1 cursor-pointer `}
+    >
+      {inHeader ? (
+        <>
+          <div className="max-w-[130px] font-bold text-lg leading-10 truncate right-0">
+            {userData.userName}
+          </div>
+          <div className="w-[40px] h-[40px] rounded-[20px] bg-primary mr-1 "></div>
+        </>
+      ) : (
+        <>
+          <div className="w-[40px] h-[40px] rounded-[20px] bg-primary mr-1 "></div>
+          <div className="max-w-[130px] font-bold text-lg leading-10 truncate right-0">
+            {userData.userName}
+          </div>
+        </>
+      )}
     </div>
   );
 };
