@@ -1,4 +1,3 @@
-import React from "react";
 import { BiSearch } from "react-icons/bi";
 import Profile from "./Profile";
 
@@ -9,8 +8,8 @@ const Header = () => {
     }
   };
   return (
-    <div className="flex justify-between w-[100%] h-[10vh] lg:h-[120px] items-center border-b-[1px] border-[#00000030] box-content">
-      <a href="/" className="text-5xl font-bold w-[170px]">
+    <div className="flex justify-between w-[100%] h-[10vh] lg:h-[120px] items-center border-b-[1px] border-[#00000030] box-content min-w-[310px] relative">
+      <a href="/" className="text-4xl lg:text-5xl font-bold w-[170px]">
         Rewind
       </a>
       <div className="relative hidden sm:block">

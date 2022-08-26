@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
+import { Navigate, useNavigate } from "react-router-dom";
 import Profile from "../common/Profile";
 
 interface props {
@@ -8,17 +9,22 @@ interface props {
 
 const Sidebar = ({ isVisible }: props) => {
   const boxStyle = "border-b-[1px] border-[#00000030] py-4";
-
+  const navigate = useNavigate();
   return (
     <div
       className={`w-[70vw] lg:w-[490px] ${
         isVisible
-          ? "absolute left-[12px] top-[15vh] drop-shadow-lg border-t-[1px] border-[#00000030]"
+          ? "absolute left-[12px] top-[calc(10vh+36px)] drop-shadow-lg border-t-[1px] border-[#00000030]"
           : "hidden"
-      } lg:block lg:relative bg-[#f2f2f2]`}
+      } lg:block lg:relative bg-[#f2f2f2] z-10`}
     >
       <div className={boxStyle}>
-        <button className="border-primary border-2 flex px-2 hover:bg-primary ">
+        <button
+          className="border-primary border-2 flex px-2 hover:bg-primary"
+          onClick={() => {
+            navigate("/upload");
+          }}
+        >
           <FiUpload className="text-4xl" />
           <span className="text-2xl font-bold">upload</span>
         </button>
