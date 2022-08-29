@@ -1,7 +1,7 @@
-import axios, { AxiosRequestHeaders } from "axios";
+import axios from "axios";
 
 interface NewPost {
-  photos: string[];
+  files?: (string | ArrayBuffer | null)[];
   content: string;
   tags: string;
 }
@@ -15,5 +15,5 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const createPost = (newPost: NewPost) => API.post("/post", newPost);
+export const createPost = (newPost: any) => API.post("/post", newPost);
 export const getPost = () => API.get("/post");

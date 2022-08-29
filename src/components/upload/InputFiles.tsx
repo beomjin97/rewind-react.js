@@ -1,8 +1,11 @@
 import React from "react";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+//@ts-ignore
+import FileBase from "react-file-base64";
+import Base64 from "./Base64";
 
 interface Props {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: ({ base64 }: { base64: string | ArrayBuffer | null }) => void;
 }
 
 const InputFiles = ({ handleChange }: Props) => {
@@ -19,14 +22,15 @@ const InputFiles = ({ handleChange }: Props) => {
         <p className="text-primary text-xl">
           최대 5장 까지 업로드 할 수 있습니다.
         </p>
+        {/* <input
+          type="file"
+          id="input-file"
+          className="hidden"
+          onChange={handleChange}
+          multiple
+        /> */}
+        <Base64 onDone={handleChange} multiple={false} />
       </label>
-      <input
-        type="file"
-        id="input-file"
-        className="hidden"
-        onChange={handleChange}
-        multiple
-      />
     </>
   );
 };
