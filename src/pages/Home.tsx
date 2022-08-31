@@ -3,18 +3,9 @@ import Menu from "../components/home/Menu";
 import Post from "../components/home/Post";
 import Sidebar from "../components/home/Sidebar";
 import { getPost } from "../api";
+import { MdOutlineImageNotSupported } from "react-icons/md";
 
-interface PostType {
-  _id: string;
-  content: string;
-  author: string;
-  imgUrl?: string[];
-  like?: string[];
-  tags?: string[];
-  comment?: string[];
-  createdAt: Date;
-  updatedAt?: Date;
-}
+import { PostType } from "../type";
 
 const Home = () => {
   const [postData, setPostData] = useState<PostType[]>([]);
@@ -23,19 +14,28 @@ const Home = () => {
   useEffect(() => {
     getPost().then((res) => {
       setPostData(res.data);
-      console.log(postData);
+      console.log(res.data);
     });
   }, []);
 
   return (
-    <div className="flex lg:justify-between justify-center ">
+    <div className="flex lg:justify-between justify-center">
       <Sidebar isVisible={isVisible} />
       <div>
         <Menu setIsVisible={setIsVisible} />
-        <div className="max-h-[calc(100vh-121px)] overflow-y-auto scrollbar-hide">
-          {postData.map((post) => (
-            <Post post={post} key={post._id} />
-          ))}
+        <div
+          className={`max-h-[calc(100vh-121px)] scrollbar-hide ${
+            postData.length === 0 ? "overflow-hidden" : "overflow-y-auto"
+          }`}
+        >
+          {postData.length === 0 ? (
+            <div className="w-[calc(100vw-24px)] max-w-[660px] text-center h-[100vh]">
+              <MdOutlineImageNotSupported className="text-primary mx-auto text-9xl mt-20" />
+              <p className="text-3xl font-thin">No Post not yet</p>
+            </div>
+          ) : (
+            postData.map((post) => <Post post={post} key={post._id} />)
+          )}
         </div>
       </div>
     </div>

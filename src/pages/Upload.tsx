@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate } from "react-router-dom";
-import imageCompression from "browser-image-compression";
+//import imageCompression from "browser-image-compression";
 
 import { createPost } from "../api";
-import { stringify } from "querystring";
 
 const Upload = () => {
   const [photos, setPhotos] = useState<string[]>([]);

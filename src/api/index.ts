@@ -17,3 +17,6 @@ API.interceptors.request.use((req) => {
 
 export const createPost = (newPost: any) => API.post("/post", newPost);
 export const getPost = () => API.get("/post");
+export const createComment = (comment: string, postId: string) =>
+  API.post(`/post/${postId}/comment`, { comment });
+export const likePost = (postId: string) => API.post(`/post/${postId}/like`);

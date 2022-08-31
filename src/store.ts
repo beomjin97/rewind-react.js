@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { userType } from "./type";
 
-export const userState = atom<string>({
+export const userState = atom<userType>({
   key: "userState", // unique ID (with respect to other atoms/selectors)
-  default: "", // default value (aka initial value)
+  default: { userName: "", _id: "" }, // default value (aka initial value)
 });

@@ -49,7 +49,7 @@ const Signup = () => {
         "http://localhost:5000/auth/signUp",
         userData
       );
-      //console.log(res);
+      alert(res.data.message);
     } catch (error: any) {
       alert(error.response.data.message);
     }

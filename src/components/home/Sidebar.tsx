@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { FiUpload } from "react-icons/fi";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Profile from "../common/Profile";
 
 interface props {
@@ -57,10 +57,10 @@ const Sidebar = ({ isVisible }: props) => {
       </div>
       <div className={boxStyle}>
         <div className="text-2xl font-bold mb-4">recommended accounts</div>
+        {/* <Profile inHeader={false} />
         <Profile inHeader={false} />
         <Profile inHeader={false} />
-        <Profile inHeader={false} />
-        <Profile inHeader={false} />
+        <Profile inHeader={false} /> */}
       </div>
     </div>
   );
