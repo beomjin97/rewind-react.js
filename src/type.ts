@@ -10,7 +10,7 @@ export interface PostType {
   content: string;
   author: userType;
   imgUrl?: string;
-  like?: string[];
+  like: string[];
   tags?: string[];
   comment?: CommentType[];
   createdAt: Date;
