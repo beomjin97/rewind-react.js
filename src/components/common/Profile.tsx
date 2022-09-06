@@ -54,7 +54,7 @@ const Profile = ({ inHeader, userName, _id }: props) => {
           </div>
         </>
       )}
-      {isOpen && <ProfileMenu _id={_id} />}
+      {isOpen && <ProfileMenu _id={_id} userName={userName} />}
     </div>
   );
 };
