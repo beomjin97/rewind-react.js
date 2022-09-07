@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate } from "react-router-dom";
-//import imageCompression from "browser-image-compression";
 
 import { createPost } from "../api";
 
@@ -13,27 +12,6 @@ const Upload = () => {
   const [tags, setTags] = useState<string>("");
 
   const navigate = useNavigate();
-  // const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files) {
-  //     for (let i = 0; i < e.target.files.length; i++) {
-  //       let file = e.target.files[i];
-  //       //photo
-  //       const url = URL.createObjectURL(file);
-  //       setPhotos((prev) => [...prev, url]);
-
-  //       //base64
-  //       let compressedFile = await imageCompression(file, {
-  //         maxSizeMB: 0.2,
-  //         maxWidthOrHeight: 1920,
-  //         useWebWorker: true,
-  //       });
-  //       let reader = new FileReader();
-  //       reader.readAsDataURL(compressedFile);
-  //       reader.onloadend = () => setBase64((prev) => [...prev, reader.result]);
-  //     }
-  //     console.log(photos);
-  //   }
-  // };
 
   const handleChange = ({
     base64,
@@ -51,11 +29,6 @@ const Upload = () => {
   };
 
   const submit = async () => {
-    // const formData = new FormData();
-    // formData.append("content", content);
-    // formData.append("tags", tags);
-    // formData.append("files", JSON.stringify(base64));
-    // console.log("files", JSON.stringify(base64));
     try {
       const res = await createPost({
         content,
@@ -67,6 +40,14 @@ const Upload = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+    if (content.length === 100) {
+      alert("100자까지만 입력할 수 있습니다.");
+      setContent((prev: string) => prev.slice(0, 100));
     }
   };
 
@@ -89,16 +70,23 @@ const Upload = () => {
               </div>
             )}
             <div className="w-[40%]">
-              <div className="text-xl font-bold mb-2">Please add a content</div>
-              <textarea
-                className="border-[1px] border-[#00000030] focus:outline-primary mb-10 pl-3 w-[100%]"
-                cols={40}
-                rows={5}
-                style={{ resize: "none" }}
-                placeholder="최대 50자까지 입력할 수 있습니다."
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              ></textarea>
+              <div className="relative">
+                <div className="text-xl font-bold mb-2">
+                  Please add a content
+                </div>
+                <div className="absolute right-1 bottom-12">
+                  {content.length}/100
+                </div>
+                <textarea
+                  className="border-[1px] border-[#00000030] focus:outline-primary mb-10 pl-3 w-[100%]"
+                  cols={40}
+                  rows={5}
+                  style={{ resize: "none" }}
+                  placeholder="최대 100자까지 입력할 수 있습니다."
+                  value={content}
+                  onChange={handleContent}
+                ></textarea>
+              </div>
               <div className="text-xl font-bold mb-2">Please add tags</div>
               <input
                 type="text"
