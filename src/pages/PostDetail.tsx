@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { createComment, getPostById, likePost } from "../api";
+import { createComment, getPostById } from "../api";
 import { PostType } from "../type";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";

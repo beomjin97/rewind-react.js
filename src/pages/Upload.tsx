@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate } from "react-router-dom";
 
 import { createPost } from "../api";
+import ChipInput from "../components/upload/ChipInput";
 
 const Upload = () => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [base64, setBase64] = useState<string | ArrayBuffer | null>("");
   const [content, setContent] = useState<string>("");
-  const [tags, setTags] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [tag, setTag] = useState<string>("");
 
   const navigate = useNavigate();
+  const chipInput = useRef<HTMLInputElement>(null);
 
   const handleChange = ({
     base64,
@@ -25,7 +28,7 @@ const Upload = () => {
     setPhotos([]);
     setBase64("");
     setContent("");
-    setTags("");
+    setTags([]);
   };
 
   const submit = async () => {
@@ -48,6 +51,13 @@ const Upload = () => {
     if (content.length === 100) {
       alert("100자까지만 입력할 수 있습니다.");
       setContent((prev: string) => prev.slice(0, 100));
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setTags((prev) => [...prev, tag]);
+      setTag("");
     }
   };
 
@@ -88,13 +98,43 @@ const Upload = () => {
                 ></textarea>
               </div>
               <div className="text-xl font-bold mb-2">Please add tags</div>
-              <input
-                type="text"
-                className="border-[1px] border-[#00000030] focus:outline-primary w-[100%] pl-3 mb-10"
-                placeholder="태그를 쉼표로 구분해주세요"
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-              />
+              <div
+                className={`h-10 w-full mb-10 overflow-auto flex items-center scrollbar-hide border-[1px] border-[#00000030] ${
+                  document.activeElement === chipInput.current &&
+                  "border-primary"
+                }`}
+              >
+                {tags.map((tag, idx) => (
+                  <div
+                    className="ml-2 px-2 rounded-lg flex items-center h-7 bg-[#cbcbcb] "
+                    key={idx}
+                  >
+                    <span>{tag}</span>
+                    <span
+                      className="cursor-pointer inline-block bg-[#7c7c7c] rounded-[50%] w-[20px] h-[20px] leading-5 text-center ml-1 "
+                      onClick={() => {
+                        setTags((prev) =>
+                          prev.filter((item, _idx) => _idx !== idx)
+                        );
+                      }}
+                    >
+                      &times;
+                    </span>
+                  </div>
+                ))}
+                <input
+                  type="text"
+                  className="outline-none pl-2"
+                  placeholder="엔터로 구분"
+                  ref={chipInput}
+                  value={tag}
+                  onKeyDown={handleKeyDown}
+                  onChange={(e) => {
+                    setTag(e.target.value);
+                  }}
+                />
+              </div>
+
               <div className="flex justify-between">
                 <button
                   className="border-[1px] text-2xl px-6 hover:bg-[#000] hover:text-white"

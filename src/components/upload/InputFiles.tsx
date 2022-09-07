@@ -17,7 +17,7 @@ const InputFiles = ({ handleChange }: Props) => {
       >
         <MdOutlineAddPhotoAlternate className="text-primary text-6xl" />
         <p className="text-primary text-xl">
-          select picture to click plus button.
+          Click the button to select a picture.
         </p>
         <p className="text-primary text-xl">
           최대 5장 까지 업로드 할 수 있습니다.
