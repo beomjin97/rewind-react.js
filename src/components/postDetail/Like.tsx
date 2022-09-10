@@ -25,7 +25,7 @@ const Like = ({ like, likeNum, postId }: Props) => {
   };
 
   return (
-    <div className="flex absolute bottom-2">
+    <div className="flex lg:absolute lg:bottom-2 mt-2">
       {islike ? (
         <IoMdHeart
           className="text-primary text-4xl cursor-pointer"

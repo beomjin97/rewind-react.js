@@ -11,8 +11,6 @@ const SelectedPhoto = ({ photo, setPhotos, idx }: Props) => {
     setPhotos((prev) => prev.filter((_, index) => index !== idx));
   };
 
-  console.log("idx", idx);
-
   return (
     <div
       className="w-[150px] h-[150px] overflow-hidden m-3 cursor-pointer"

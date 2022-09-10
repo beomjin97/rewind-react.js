@@ -12,7 +12,7 @@ import { createComment, likePost } from "../../api";
 import { PostType } from "../../type";
 import { userState } from "../../store";
 import { BiWindows } from "react-icons/bi";
-import Like from "../userDetail/Like";
+import Like from "../postDetail/Like";
 
 interface Props {
   post: PostType;

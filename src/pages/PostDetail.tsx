@@ -9,7 +9,7 @@ import { useRecoilValue } from "recoil";
 
 import Profile from "../components/common/Profile";
 import { userState } from "../store";
-import Like from "../components/userDetail/Like";
+import Like from "../components/postDetail/Like";
 import { IoMdSend } from "react-icons/io";
 
 const PostDetail = () => {
@@ -40,8 +40,8 @@ const PostDetail = () => {
   };
 
   return post.content ? (
-    <div className="w-full flex h-[100vh]">
-      <div className="bg-[#101010] w-[55%] flex items-center">
+    <div className="w-full lg:flex h-[100vh]">
+      <div className="bg-[#101010] lg:w-[55%] flex items-center w-full">
         <MdOutlineCancel
           className="text-primary text-5xl absolute left-5 top-5 cursor-pointer"
           onClick={() => navigate(-1)}
@@ -54,7 +54,7 @@ const PostDetail = () => {
           />
         </div>
       </div>
-      <div className="bg-[#f2f2f2] w-[45%] p-10">
+      <div className="bg-[#f2f2f2] lg:w-[45%] w-full p-10">
         <div className="flex justify-between ">
           <Profile
             inHeader={false}

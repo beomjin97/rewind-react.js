@@ -23,7 +23,7 @@ const InputFiles = ({ handleChange, setPhotos }: Props) => {
         <p className="text-primary text-xl">
           최대 5장 까지 업로드 할 수 있습니다.
         </p>
-        <Base64 onDone={handleChange} multiple setPhotos={setPhotos} />
+        <Base64 onDone={handleChange} multiple={false} setPhotos={setPhotos} />
       </label>
     </>
   );

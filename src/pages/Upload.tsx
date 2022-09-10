@@ -62,7 +62,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <>
       <div className="bg-[#FFFBFB] lg:w-[80%] mx-auto py-10 mt-10 mb-10">
         <div className="mx-auto w-[90%]">
           <h1 className="font-bold text-4xl">Upload Post</h1>
@@ -157,7 +157,7 @@ const Upload = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
