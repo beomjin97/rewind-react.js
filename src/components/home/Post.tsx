@@ -12,6 +12,7 @@ import { createComment, likePost } from "../../api";
 import { PostType } from "../../type";
 import { userState } from "../../store";
 import { BiWindows } from "react-icons/bi";
+import Like from "../userDetail/Like";
 
 interface Props {
   post: PostType;
@@ -47,6 +48,18 @@ const Post = ({ post }: Props) => {
     likePost(post._id).then((res) => console.log(res.data.message));
   };
 
+  const handleLike = () => {
+    setLike((prev) => !prev);
+    setLikeNum((prev) => prev + 1);
+    likePost(post._id).then((res) => console.log(res.data.message));
+  };
+
+  const handleLikeCancel = () => {
+    setLike((prev) => !prev);
+    setLikeNum((prev) => prev - 1);
+    likePost(post._id).then((res) => console.log(res.data.message));
+  };
+
   return (
     <div className="w-[calc(100vw-24px)] max-w-[660px] py-2 border-b-2 border-[#00000030] box-content">
       <Profile
@@ -67,9 +80,9 @@ const Post = ({ post }: Props) => {
       <div className="flex justify-between my-2">
         <div className="flex">
           {like ? (
-            <IoMdHeart className={iconStyle} onClick={handleClickLike} />
+            <IoMdHeart className={iconStyle} onClick={handleLikeCancel} />
           ) : (
-            <IoMdHeartEmpty className={iconStyle} onClick={handleClickLike} />
+            <IoMdHeartEmpty className={iconStyle} onClick={handleLike} />
           )}
           <span className="mr-2">{likeNum}</span>
           <MdOutlineAddComment

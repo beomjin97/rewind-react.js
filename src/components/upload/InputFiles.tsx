@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 //@ts-ignore
 import FileBase from "react-file-base64";
@@ -6,9 +6,10 @@ import Base64 from "./Base64";
 
 interface Props {
   handleChange: ({ base64 }: { base64: string | ArrayBuffer | null }) => void;
+  setPhotos: Dispatch<SetStateAction<string[]>>;
 }
 
-const InputFiles = ({ handleChange }: Props) => {
+const InputFiles = ({ handleChange, setPhotos }: Props) => {
   return (
     <>
       <label
@@ -22,7 +23,7 @@ const InputFiles = ({ handleChange }: Props) => {
         <p className="text-primary text-xl">
           최대 5장 까지 업로드 할 수 있습니다.
         </p>
-        <Base64 onDone={handleChange} multiple={false} />
+        <Base64 onDone={handleChange} multiple setPhotos={setPhotos} />
       </label>
     </>
   );

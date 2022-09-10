@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   multiple: boolean;
   onDone: any;
+  setPhotos: Dispatch<SetStateAction<string[]>>;
 }
 
 interface FileInfo {
@@ -13,14 +14,16 @@ interface FileInfo {
   file: File;
 }
 
-const Base64 = ({ multiple, onDone }: Props) => {
+const Base64 = ({ multiple, onDone, setPhotos }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let files = e.target.files;
+
     let allFiles: FileInfo[] = [];
     if (files) {
       for (let i = 0; i < files.length; i++) {
         let file = files[i];
-
+        let imgUrl = URL.createObjectURL(files[i]);
+        setPhotos((prev) => [...prev, imgUrl]);
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = async () => {
@@ -51,6 +54,7 @@ const Base64 = ({ multiple, onDone }: Props) => {
   return (
     <input
       className="hidden"
+      accept="image/jpg,image/png,image/jpeg"
       id="input-file"
       type="file"
       onChange={handleChange}

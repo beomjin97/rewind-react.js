@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import InputFiles from "../components/upload/InputFiles";
 import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate } from "react-router-dom";
@@ -71,11 +71,16 @@ const Upload = () => {
           </h3>
           <div className="flex mt-8 justify-between">
             {photos.length === 0 ? (
-              <InputFiles handleChange={handleChange} />
+              <InputFiles handleChange={handleChange} setPhotos={setPhotos} />
             ) : (
-              <div className="flex flex-wrap">
-                {photos.map((photo) => (
-                  <SelectedPhoto photo={photo} />
+              <div className="w-[50%] h-[60vh] flex flex-wrap border-dashed border-[#00000050] border-[1px]">
+                {photos.map((photo, idx) => (
+                  <SelectedPhoto
+                    key={idx}
+                    idx={idx}
+                    photo={photo}
+                    setPhotos={setPhotos}
+                  />
                 ))}
               </div>
             )}
@@ -99,19 +104,19 @@ const Upload = () => {
               </div>
               <div className="text-xl font-bold mb-2">Please add tags</div>
               <div
-                className={`h-10 w-full mb-10 overflow-auto flex items-center scrollbar-hide border-[1px] border-[#00000030] ${
+                className={`h-10 w-full mb-10 overflow-x-auto flex items-center scrollbar-hide border-[1px] border-[#00000030] ${
                   document.activeElement === chipInput.current &&
-                  "border-primary"
+                  "border-primary border-[2px]"
                 }`}
               >
                 {tags.map((tag, idx) => (
                   <div
-                    className="ml-2 px-2 rounded-lg flex items-center h-7 bg-[#cbcbcb] "
+                    className="ml-2 px-2 rounded-lg h-7 bg-[#cbcbcb] flex items-center flex-none"
                     key={idx}
                   >
-                    <span>{tag}</span>
-                    <span
-                      className="cursor-pointer inline-block bg-[#7c7c7c] rounded-[50%] w-[20px] h-[20px] leading-5 text-center ml-1 "
+                    <div className="inline">{tag}</div>
+                    <div
+                      className="cursor-pointer inline bg-[#7c7c7c] rounded-[50%] w-[20px] h-[20px] leading-5 text-center ml-1 "
                       onClick={() => {
                         setTags((prev) =>
                           prev.filter((item, _idx) => _idx !== idx)
@@ -119,12 +124,12 @@ const Upload = () => {
                       }}
                     >
                       &times;
-                    </span>
+                    </div>
                   </div>
                 ))}
                 <input
                   type="text"
-                  className="outline-none pl-2"
+                  className="pl-2 outline-none"
                   placeholder="엔터로 구분"
                   ref={chipInput}
                   value={tag}
@@ -134,7 +139,6 @@ const Upload = () => {
                   }}
                 />
               </div>
-
               <div className="flex justify-between">
                 <button
                   className="border-[1px] text-2xl px-6 hover:bg-[#000] hover:text-white"
