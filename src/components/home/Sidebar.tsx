@@ -12,11 +12,11 @@ const Sidebar = ({ isVisible }: props) => {
   const navigate = useNavigate();
   return (
     <div
-      className={`w-[70vw] lg:w-[490px] ${
+      className={`lg:w-[70vw] w-[490px] ${
         isVisible
-          ? "absolute left-[12px] top-[calc(10vh+36px)] drop-shadow-lg border-t-[1px] border-[#00000030]"
-          : "hidden"
-      } lg:block lg:relative bg-[#f2f2f2] z-10`}
+          ? "md:absolute left-[12px] top-[calc(3rem+36px)] drop-shadow-lg border-t-[1px] border-[#00000030]"
+          : "md:hidden"
+      } block relative bg-[#f2f2f2] z-10`}
     >
       <div className={boxStyle}>
         <button

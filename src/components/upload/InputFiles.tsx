@@ -14,7 +14,7 @@ const InputFiles = ({ handleChange, setPhotos }: Props) => {
     <>
       <label
         htmlFor="input-file"
-        className="w-[50%] h-[60vh] cursor-pointer border-dashed border-[#00000050] border-[1px] flex flex-col  justify-center items-center"
+        className=" sm:w-[100%] w-[50%] h-[60vh] cursor-pointer border-dashed border-[#00000050] border-[1px] flex flex-col  justify-center items-center"
       >
         <MdOutlineAddPhotoAlternate className="text-primary text-6xl" />
         <p className="text-primary text-xl">

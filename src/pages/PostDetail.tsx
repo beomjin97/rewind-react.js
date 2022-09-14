@@ -40,13 +40,13 @@ const PostDetail = () => {
   };
 
   return post.content ? (
-    <div className="w-full lg:flex h-[100vh]">
-      <div className="bg-[#101010] lg:w-[55%] flex items-center w-full">
+    <div className="w-full flex md:block h-[100vh]">
+      <div className="bg-[#101010] w-[55%] flex items-center md:w-full">
         <MdOutlineCancel
           className="text-primary text-5xl absolute left-5 top-5 cursor-pointer"
           onClick={() => navigate(-1)}
         />
-        <div className="w-[100%] h-[660px] bg-[#D9D9D9] overflow-hidden flex justify-center">
+        <div className="w-[100%] md:h-auto h-[660px] bg-[#D9D9D9] overflow-hidden flex justify-center">
           <img
             src={post.imgUrl ? post.imgUrl : ""}
             alt=""
@@ -54,14 +54,14 @@ const PostDetail = () => {
           />
         </div>
       </div>
-      <div className="bg-[#f2f2f2] lg:w-[45%] w-full p-10">
+      <div className="bg-[#f2f2f2] w-[45%] md:w-full p-10 md:p-5">
         <div className="flex justify-between ">
           <Profile
             inHeader={false}
             userName={post.author.userName}
             _id={post.author._id}
           />
-          <span className="text-lg">{moment(post.createdAt).fromNow()}</span>
+          <span className="text-md">{moment(post.createdAt).fromNow()}</span>
         </div>
         <div className="w-full h-[50%] border-b-[1px] border-[#00000030] relative ">
           <div className="text-2xl mt-10">{post.content}</div>
@@ -78,13 +78,15 @@ const PostDetail = () => {
         </div>
         <div className="relative mt-4">
           <form onSubmit={handleSubmit}>
-            <span className="font-bold mr-2 text-xl">{user.userName}</span>
+            <span className="font-bold mr-2 text-xl sm:hidden">
+              {user.userName}
+            </span>
             <input
               type="text"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="댓글을 입력해보세요"
-              className="pl-2 py-1 text-xl focus:outline-primary w-[70%]"
+              className="pl-2 py-1 text-xl focus:outline-primary sm:w-[90%] w-[70%]"
             />
             <button
               type="submit"

@@ -29,14 +29,14 @@ const Header = () => {
   }, [token]);
 
   return (
-    <div className="flex justify-between w-[100%] h-[10vh] lg:h-[120px] items-center border-b-[1px] border-[#00000030] box-content min-w-[310px] relative">
-      <a href="/" className="text-4xl lg:text-5xl font-bold w-[170px]">
+    <div className="flex justify-between w-[100%] lg:h-12 h-[120px] items-center border-b-[1px] border-[#00000030] min-w-[310px] relative">
+      <a href="/" className="lg:text-4xl text-5xl font-bold w-[170px]">
         Rewind
       </a>
-      <div className="relative hidden sm:block">
+      <div className="relative sm:hidden block">
         <input
           type="text"
-          className="w-[24vw] h-[40px] rounded-2xl pl-4 focus:outline-primary placeholder:text-transparent placeholder:lg:text-[#00000070]"
+          className="w-[24vw] h-[40px] rounded-2xl pl-4 focus:outline-primary placeholder:lg:text-transparent placeholder:text-[#00000070]"
           placeholder="게시글 내용 또는 태그 검색"
           onKeyDown={search}
         />

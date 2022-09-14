@@ -7,7 +7,14 @@ module.exports = {
       white: "#FFFFFF",
       transparent: "transparent",
     },
-    extend: {},
+    extend: {
+      screens: {
+        xl: { max: "1799px" },
+        lg: { max: "1199px" },
+        md: { max: "899px" },
+        sm: { max: "599px" },
+      },
+    },
   },
   plugins: [require("tailwind-scrollbar-hide")],
 };

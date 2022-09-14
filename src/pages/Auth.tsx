@@ -7,8 +7,8 @@ import Signup from "../components/auth/Signup";
 const Auth = () => {
   const [account, setAccount] = useState<boolean>(true);
   return (
-    <div className="bg-[#DEDEDE] flex justify-center items-center h-[100vh] min-h-[750px]">
-      <div className="w-[100vw] md:w-[22%] min-w-[320px] h-[100vh] md:h-[80%] min-h-[750px] bg-[#FAFAFA] border-2 border-[#00000030] relative ">
+    <div className="bg-[#DEDEDE] flex justify-center items-center h-[100vh] min-h-[700px]">
+      <div className="lg:w-[100vw] w-[22%] min-w-[280px] lg:h-[100vh] min-h-[700px] h-[80%] bg-[#FAFAFA] border-2 border-[#00000030] relative ">
         <h1 className="my-20 text-center text-5xl font-bold">Rewind</h1>
         {account ? <Signin /> : <Signup />}
         <div className="w-[76%] h-[1px] bg-[#000] mx-auto my-10" />

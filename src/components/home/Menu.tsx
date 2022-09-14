@@ -7,7 +7,7 @@ interface props {
 
 const Menu = ({ setIsVisible }: props) => {
   return (
-    <div className="w-[calc(100vw-24px)] h-[36px] lg:hidden max-w-[660px] border-b-[1px] border-[#00000030]">
+    <div className="w-[calc(100vw-24px)] h-[36px] hidden md:block max-w-[660px] border-b-[1px] border-[#00000030]">
       <HiMenu
         className="text-primary text-4xl cursor-pointer"
         onClick={() => {

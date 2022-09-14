@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex lg:justify-between justify-center">
+    <div className="flex justify-between lg:justify-center">
       <Sidebar isVisible={isVisible} />
       <div>
         <Menu setIsVisible={setIsVisible} />

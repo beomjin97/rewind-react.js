@@ -17,12 +17,14 @@ const Profile = ({ inHeader, userName, _id }: props) => {
     <div
       className={`${
         inHeader ? "flex-row-reverse items-center" : ""
-      } w-[170px] flex mb-1 cursor-pointer relative`}
+      } md:w-auto w-[170px] flex mb-1 cursor-pointer relative`}
     >
       {inHeader ? (
         <>
           <IoIosArrowDown
-            className={`text-primary text-2xl ${isOpen && "rotate-180"}`}
+            className={`text-primary text-2xl ${
+              isOpen && "rotate-180"
+            } duration-300`}
             onClick={() => {
               if (setIsOpen) {
                 setIsOpen((prev) => !prev);
@@ -30,7 +32,7 @@ const Profile = ({ inHeader, userName, _id }: props) => {
             }}
           />
           <div
-            className="max-w-[130px] font-bold text-lg leading-10 truncate"
+            className="max-w-[130px] font-bold text-lg leading-10 truncate md:hidden"
             onClick={() => navigate(`/user/${_id}`)}
           >
             {userName}

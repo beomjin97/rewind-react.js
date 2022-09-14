@@ -63,13 +63,13 @@ const Upload = () => {
 
   return (
     <>
-      <div className="bg-[#FFFBFB] lg:w-[80%] mx-auto py-10 mt-10 mb-10">
+      <div className="bg-[#FFFBFB] w-[80%] lg:w-[100%] mx-auto py-10 mt-10 mb-10">
         <div className="mx-auto w-[90%]">
-          <h1 className="font-bold text-4xl">Upload Post</h1>
-          <h3 className="text-[#d9d9d9]">
+          <h1 className="font-bold text-4xl sm:text-center">Upload Post</h1>
+          <h3 className="text-[#d9d9d9] sm:text-center">
             rewind your memory with <span className="text-primary">Rewind</span>
           </h3>
-          <div className="flex mt-8 justify-between">
+          <div className=" sm:block flex mt-8 justify-between">
             {photos.length === 0 ? (
               <InputFiles handleChange={handleChange} setPhotos={setPhotos} />
             ) : (
@@ -84,7 +84,7 @@ const Upload = () => {
                 ))}
               </div>
             )}
-            <div className="w-[40%]">
+            <div className="w-[40%] sm:w-[100%]">
               <div className="relative">
                 <div className="text-xl font-bold mb-2">
                   Please add a content
@@ -141,13 +141,13 @@ const Upload = () => {
               </div>
               <div className="flex justify-between">
                 <button
-                  className="border-[1px] text-2xl px-6 hover:bg-[#000] hover:text-white"
+                  className="border-[1px] text-2xl px-6 hover:bg-[#000] hover:text-white w-28 text-center"
                   onClick={cancel}
                 >
                   cancel
                 </button>
                 <button
-                  className="border-[1px] text-2xl px-6 text-primary hover:bg-primary hover:text-white"
+                  className="border-[1px] text-2xl px-6 text-primary hover:bg-primary hover:text-white w-28 text-center"
                   onClick={submit}
                 >
                   upload
