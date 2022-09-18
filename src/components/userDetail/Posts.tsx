@@ -1,19 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Post = () => {
-  return (
+interface Props {
+  posts: { _id: string; imgUrl: string }[] | undefined;
+}
+
+const Post = ({ posts }: Props) => {
+  const navigate = useNavigate();
+
+  return posts ? (
     <div className="flex w-[1000px] h-[350px] flex-wrap mx-auto overflow-auto scrollbar-hide">
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
-      <div className="w-[150px] h-[150px] bg-primary m-5"></div>
+      {posts.map((item, idx) => (
+        <div
+          key={idx}
+          className="w-[150px] h-[150px] bg-[#00000030] m-5 overflow-hidden cursor-pointer"
+          onClick={() => navigate(`/post/${item._id}`)}
+        >
+          <img src={item.imgUrl} alt="test" />
+        </div>
+      ))}
     </div>
+  ) : (
+    <div className="">No Post not yet</div>
   );
 };
 

@@ -31,15 +31,19 @@ const UserDetail = () => {
   }, [userId]);
 
   console.log(userData);
+
   return (
     <>
       <Profile
         name={userData?.name || ""}
         userName={userData?.userName || ""}
+        postNum={userData?.posts?.length || 0}
+        followerNum={userData?.followedBy?.length || 0}
+        followingNum={userData?.following?.length || 0}
       />
       <Menu menu={menu} setMenu={setMenu} />
-      {menu === "post" && <Post />}
-      {menu === "liked" && <Liked />}
+      {menu === "post" && <Post posts={userData?.posts} />}
+      {menu === "liked" && <Liked likes={userData?.likes} />}
       {menu === "followers" && <Followers />}
       {menu === "following" && <Following />}
     </>
