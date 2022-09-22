@@ -10,7 +10,7 @@ const Menu = ({ menu, setMenu }: Props) => {
 
   return (
     <div className="w-full border-t-[1px] border-[#00000050]">
-      <ul className="flex w-[500px] justify-around text-xl mx-auto my-4">
+      <ul className="flex md:w-full w-[500px] justify-around text-xl mx-auto my-4">
         {arr.map((item, idx) => (
           <li
             key={idx}
