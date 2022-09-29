@@ -22,3 +22,5 @@ export const createComment = (comment: string, postId: string) =>
 export const likePost = (postId: string) => API.post(`/post/${postId}/like`);
 export const getPostById = (postId: string) => API.get(`/post/${postId}`);
 export const getUserById = (userId: string) => API.get(`/user/${userId}`);
+export const followUser = (followingId: string) =>
+  API.post(`/user/follow/${followingId}`);

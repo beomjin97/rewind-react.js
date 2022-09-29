@@ -43,7 +43,7 @@ const PostDetail = () => {
     <div className="w-full flex md:block h-[100vh]">
       <div className="bg-[#101010] w-[55%] flex items-center md:w-full">
         <MdOutlineCancel
-          className="text-primary text-5xl absolute left-5 top-5 cursor-pointer"
+          className="absolute text-5xl cursor-pointer text-primary left-5 top-5"
           onClick={() => navigate(-1)}
         />
         <div className="w-[100%] md:h-auto h-[660px] bg-[#D9D9D9] overflow-hidden flex justify-center">
@@ -64,10 +64,10 @@ const PostDetail = () => {
           <span className="text-md">{moment(post.createdAt).fromNow()}</span>
         </div>
         <div className="w-full h-[50%] border-b-[1px] border-[#00000030] relative ">
-          <div className="text-2xl mt-10">{post.content}</div>
-          <div className="text-2xl mt-10">
+          <div className="mt-10 text-2xl">{post.content}</div>
+          <div className="my-10 text-2xl">
             {post.tags?.map((item) => (
-              <span className="hover:underline cursor-pointer">{`#${item} `}</span>
+              <span className="cursor-pointer hover:underline">{`#${item} `}</span>
             ))}
           </div>
           <Like
@@ -78,7 +78,7 @@ const PostDetail = () => {
         </div>
         <div className="relative mt-4">
           <form onSubmit={handleSubmit}>
-            <span className="font-bold mr-2 text-xl sm:hidden">
+            <span className="mr-2 text-xl font-bold sm:hidden">
               {user.userName}
             </span>
             <input
@@ -91,7 +91,7 @@ const PostDetail = () => {
             <button
               type="submit"
               onSubmit={handleSubmit}
-              className="text-primary ml-2 text-4xl absolute bottom-0"
+              className="absolute bottom-0 ml-2 text-4xl text-primary"
             >
               <IoMdSend />
             </button>
@@ -101,12 +101,8 @@ const PostDetail = () => {
           post.comment.map((item) => (
             <div className="mt-5" key={item._id}>
               <span
-                className="font-bold mr-4 cursor-pointer text-xl"
-                onClick={() =>
-                  navigate(
-                    `/user/${post.comment && post.comment[0].author._id}`
-                  )
-                }
+                className="mr-4 text-xl font-bold cursor-pointer"
+                onClick={() => navigate(`/user/${item.author._id}`)}
               >
                 {item.author.userName}
               </span>

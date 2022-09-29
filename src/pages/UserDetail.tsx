@@ -13,13 +13,13 @@ export interface userData {
   userName: string;
   posts: { _id: string; imgUrl: string }[];
   likes: { _id: string; imgUrl: string }[];
-  following: { username: string }[];
-  followedBy: { username: string }[];
+  following: { userName: string; _id: string }[];
+  followedBy: { userName: string; _id: string }[];
 }
 
 const UserDetail = () => {
   const [menu, setMenu] = useState<string>("post");
-  const [userData, setUserData] = useState<userData>();
+  const [userData, setUserData] = useState<userData | null>();
   const { userId } = useParams();
 
   useEffect(() => {
@@ -27,10 +27,13 @@ const UserDetail = () => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setUserData(null);
+      });
   }, [userId]);
 
-  console.log(userData);
+  if (userData === null) return <div>존재하지 않는 사용자입니다.</div>;
 
   return (
     <>
@@ -38,14 +41,19 @@ const UserDetail = () => {
         name={userData?.name || ""}
         userName={userData?.userName || ""}
         postNum={userData?.posts?.length || 0}
+        followers={userData?.followedBy || []}
         followerNum={userData?.followedBy?.length || 0}
         followingNum={userData?.following?.length || 0}
       />
       <Menu menu={menu} setMenu={setMenu} />
       {menu === "post" && <Post posts={userData?.posts} />}
       {menu === "liked" && <Liked likes={userData?.likes} />}
-      {menu === "followers" && <Followers />}
-      {menu === "following" && <Following />}
+      {menu === "followers" && (
+        <Followers followers={userData?.followedBy || []} />
+      )}
+      {menu === "following" && (
+        <Following following={userData?.following || []} />
+      )}
     </>
   );
 };

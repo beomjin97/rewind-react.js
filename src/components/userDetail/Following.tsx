@@ -1,39 +1,28 @@
-import React from "react";
-import Profile from "../common/Profile";
+import { useNavigate } from "react-router-dom";
 
-const Following = () => {
+interface Props {
+  following: { userName: string; _id: string }[];
+}
+
+const Following = ({ following }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="my-10 mx-auto">
-      <div className="my-3 flex justify-center">
-        <Profile inHeader={false} userName={"yellow"} _id={""} />
-        <div className="w-[200px] h-[30px] bg-primary text-xl font-bold text-center">
-          following
+    <div className="mx-auto my-10">
+      {following.map((item) => (
+        <div className="flex justify-center my-3" key={item._id}>
+          <div
+            className="w-[40px] h-[40px] rounded-[20px] bg-primary mr-3 cursor-pointer"
+            onClick={() => navigate(`/user/${item._id}`)}
+          ></div>
+          <div
+            className="max-w-[130px] cursor-pointer font-bold text-lg leading-10"
+            onClick={() => navigate(`/user/${item._id}`)}
+          >
+            {item.userName}
+          </div>
         </div>
-      </div>
-      <div className="my-3 flex justify-center">
-        <Profile inHeader={false} userName={"yellow"} _id={""} />
-        <div className="w-[200px] h-[30px] bg-primary text-xl font-bold text-center">
-          following
-        </div>
-      </div>
-      <div className="my-3 flex justify-center">
-        <Profile inHeader={false} userName={"yellow"} _id={""} />
-        <div className="w-[200px] h-[30px] bg-primary text-xl font-bold text-center">
-          following
-        </div>
-      </div>
-      <div className="my-3 flex justify-center">
-        <Profile inHeader={false} userName={"yellow"} _id={""} />
-        <div className="w-[200px] h-[30px] bg-primary text-xl font-bold text-center">
-          following
-        </div>
-      </div>
-      <div className="my-3 flex justify-center">
-        <Profile inHeader={false} userName={"yellow"} _id={""} />
-        <div className="w-[200px] h-[30px] bg-primary text-xl font-bold text-center">
-          following
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
