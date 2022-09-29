@@ -25,15 +25,15 @@ const Like = ({ like, likeNum, postId }: Props) => {
   };
 
   return (
-    <div className="flex absolute bottom-2 mt-2 md:relative ">
+    <div className="flex mt-2">
       {islike ? (
         <IoMdHeart
-          className="text-primary text-4xl cursor-pointer"
+          className="text-4xl cursor-pointer text-primary"
           onClick={handleLikeCancel}
         />
       ) : (
         <IoMdHeartEmpty
-          className=" text-4xl cursor-pointer"
+          className="text-4xl cursor-pointer "
           onClick={handleLike}
         />
       )}

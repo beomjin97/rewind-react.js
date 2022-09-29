@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { createComment, getPostById } from "../api";
+import { createComment, getPostById, deletePost, editPost } from "../api";
 import { PostType } from "../type";
 import { MdOutlineCancel } from "react-icons/md";
+import { BiEdit } from "react-icons/bi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import { useRecoilValue } from "recoil";
@@ -16,9 +18,7 @@ const PostDetail = () => {
   //@ts-ignore
   const [post, setPost] = useState<PostType>({});
   const [comment, setComment] = useState<string>("");
-
   const user = useRecoilValue(userState);
-
   const { postId } = useParams();
   const navigate = useNavigate();
 
@@ -37,6 +37,24 @@ const PostDetail = () => {
       setComment("");
       window.location.reload();
     });
+  };
+
+  const deleteMyPost = async () => {
+    if (window.confirm("해당 게시물을 삭제할까요?")) {
+      try {
+        const res = await deletePost(postId || "");
+        alert(res.data.message);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const editMyPost = async () => {
+    if (window.confirm("해당 게시물을 수정할까요?")) {
+      navigate(`/update/${postId}`);
+    }
   };
 
   return post.content ? (
@@ -70,11 +88,25 @@ const PostDetail = () => {
               <span className="cursor-pointer hover:underline">{`#${item} `}</span>
             ))}
           </div>
-          <Like
-            postId={post._id}
-            like={post.like?.includes(user._id)}
-            likeNum={post.like?.length}
-          />
+          <div className="absolute flex justify-between w-full bottom-2 md:relative">
+            <Like
+              postId={post._id}
+              like={post.like?.includes(user._id)}
+              likeNum={post.like?.length}
+            />
+            {user._id === post.author._id && (
+              <div className="flex mt-2">
+                <RiDeleteBin5Line
+                  className="mr-2 text-4xl cursor-pointer hover:text-primary"
+                  onClick={deleteMyPost}
+                />
+                <BiEdit
+                  className="text-4xl cursor-pointer hover:text-primary"
+                  onClick={editMyPost}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <div className="relative mt-4">
           <form onSubmit={handleSubmit}>
@@ -97,18 +129,20 @@ const PostDetail = () => {
             </button>
           </form>
         </div>
-        {post.comment &&
-          post.comment.map((item) => (
-            <div className="mt-5" key={item._id}>
-              <span
-                className="mr-4 text-xl font-bold cursor-pointer"
-                onClick={() => navigate(`/user/${item.author._id}`)}
-              >
-                {item.author.userName}
-              </span>
-              <span className="text-xl">{item.content}</span>
-            </div>
-          ))}
+        <div className="overflow-y-auto h-80 scrollbar-hide">
+          {post.comment &&
+            post.comment.map((item) => (
+              <div className="mt-5" key={item._id}>
+                <span
+                  className="mr-4 text-xl font-bold cursor-pointer"
+                  onClick={() => navigate(`/user/${item.author._id}`)}
+                >
+                  {item.author.userName}
+                </span>
+                <span className="text-xl">{item.content}</span>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   ) : (
