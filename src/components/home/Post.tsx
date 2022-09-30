@@ -98,16 +98,10 @@ const Post = ({ post }: Props) => {
       <div>{post.content}</div>
       <div>{post.tags?.map((item) => `#${item} `)}</div>
       <div className="my-2">
-        {/* {post.comment?.map((item) => (
-          <div key={item._id}>
-            <span className="font-bold mr-2">{item.author.userName}</span>
-            <span>{item.content}</span>
-          </div>
-        ))} */}
         {post.comment && post.comment.length !== 0 && (
           <>
             <span
-              className="font-bold mr-2 cursor-pointer"
+              className="mr-2 font-bold cursor-pointer"
               onClick={() =>
                 navigate(`/user/${post.comment && post.comment[0].author._id}`)
               }
@@ -121,7 +115,7 @@ const Post = ({ post }: Props) => {
       {isInputActive && (
         <div className="relative">
           <form onSubmit={handleSubmit}>
-            <span className="font-bold mr-2">{user.userName}</span>
+            <span className="mr-2 font-bold">{user.userName}</span>
             <input
               type="text"
               value={comment}
@@ -132,7 +126,7 @@ const Post = ({ post }: Props) => {
             <button
               type="submit"
               onSubmit={handleSubmit}
-              className="text-primary ml-2 text-2xl absolute bottom-0"
+              className="absolute bottom-0 ml-2 text-2xl text-primary"
             >
               <IoMdSend />
             </button>

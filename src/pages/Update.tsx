@@ -40,7 +40,7 @@ const Update = () => {
         files: base64,
       });
       console.log(res.data);
-      alert("업로드 되었습니다.");
+      alert("수정 되었습니다.");
       navigate("/");
     } catch (error) {
       console.log(error);

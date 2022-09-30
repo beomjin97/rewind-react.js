@@ -23,3 +23,5 @@ export const createComment = (comment: string, postId: string) =>
 export const getUserById = (userId: string) => API.get(`/user/${userId}`);
 export const followUser = (followingId: string) =>
   API.post(`/user/follow/${followingId}`);
+export const searchUser = (userName: string) =>
+  API.get(`/search?user=${userName}`);
