@@ -1,13 +1,13 @@
-import React from "react";
 import { FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Profile from "../common/Profile";
 
 interface props {
   isVisible: boolean;
+  tags: string[];
 }
 
-const Sidebar = ({ isVisible }: props) => {
+const Sidebar = ({ isVisible, tags }: props) => {
   const boxStyle = "border-b-[1px] border-[#00000030] py-4";
   const navigate = useNavigate();
   return (
@@ -20,7 +20,7 @@ const Sidebar = ({ isVisible }: props) => {
     >
       <div className={boxStyle}>
         <button
-          className="border-primary border-2 flex px-2 hover:bg-primary"
+          className="flex px-2 border-2 border-primary hover:bg-primary"
           onClick={() => {
             navigate("/upload");
           }}
@@ -30,33 +30,17 @@ const Sidebar = ({ isVisible }: props) => {
         </button>
       </div>
       <div className={boxStyle}>
-        <div className="text-2xl font-bold mb-4">popular tags</div>
+        <div className="mb-4 text-2xl font-bold">popular tags</div>
         <div className="flex flex-wrap ">
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
-          <button className="w-[100px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
-            #seoul
-          </button>
+          {tags.map((tag) => (
+            <button className="min-w-[80px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1">
+              {`#${tag}`}
+            </button>
+          ))}
         </div>
       </div>
       <div className={boxStyle}>
-        <div className="text-2xl font-bold mb-4">recommended accounts</div>
+        <div className="mb-4 text-2xl font-bold">recommended accounts</div>
         {/* <Profile inHeader={false} />
         <Profile inHeader={false} />
         <Profile inHeader={false} />

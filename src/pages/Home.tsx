@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Menu from "../components/home/Menu";
 import Post from "../components/home/Post";
 import Sidebar from "../components/home/Sidebar";
-import { getPost } from "../api";
+import { getPost, getTags } from "../api";
 import { MdOutlineImageNotSupported } from "react-icons/md";
 
 import { PostType } from "../type";
@@ -10,17 +10,21 @@ import { PostType } from "../type";
 const Home = () => {
   const [postData, setPostData] = useState<PostType[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     getPost().then((res) => {
       setPostData(res.data);
-      console.log(res.data);
+    });
+    getTags().then((res) => {
+      setTags(res.data);
+      console.log("tag", res.data);
     });
   }, []);
 
   return (
     <div className="flex justify-between lg:justify-center">
-      <Sidebar isVisible={isVisible} />
+      <Sidebar isVisible={isVisible} tags={tags} />
       <div>
         <Menu setIsVisible={setIsVisible} />
         <div
@@ -30,7 +34,7 @@ const Home = () => {
         >
           {postData.length === 0 ? (
             <div className="w-[calc(100vw-24px)] max-w-[660px] text-center h-[100vh]">
-              <MdOutlineImageNotSupported className="text-primary mx-auto text-9xl mt-20" />
+              <MdOutlineImageNotSupported className="mx-auto mt-20 text-primary text-9xl" />
               <p className="text-3xl font-thin">No Post not yet</p>
             </div>
           ) : (
