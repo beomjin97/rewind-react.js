@@ -17,12 +17,16 @@ const Header = () => {
 
   const search = async (e: React.KeyboardEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await searchUser(searchTerm);
-      navigate(`/user/${res.data.userId}`);
-    } catch (error) {
-      navigate("/user/NotFound");
-      console.log(error);
+    if (searchTerm.startsWith("#")) {
+      navigate(`/?tag=${searchTerm.slice(1)}`);
+    } else {
+      try {
+        const res = await searchUser(searchTerm);
+        navigate(`/user/${res.data.userId}`);
+      } catch (error) {
+        navigate("/user/NotFound");
+        console.log(error);
+      }
     }
   };
 

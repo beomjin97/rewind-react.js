@@ -96,7 +96,14 @@ const Post = ({ post }: Props) => {
       </div>
 
       <div>{post.content}</div>
-      <div>{post.tags?.map((item) => `#${item} `)}</div>
+      <div>
+        {post.tags?.map((tag) => (
+          <span
+            className="cursor-pointer hover:underline"
+            onClick={() => navigate(`/?tag=${tag}`)}
+          >{`#${tag} `}</span>
+        ))}
+      </div>
       <div className="my-2">
         {post.comment && post.comment.length !== 0 && (
           <>
