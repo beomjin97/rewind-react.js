@@ -16,6 +16,7 @@ export const editPost = (postId: string, payload: any) =>
   API.patch(`/post/${postId}`, payload);
 export const likePost = (postId: string) => API.post(`/post/${postId}/like`);
 export const getPostById = (postId: string) => API.get(`/post/${postId}`);
+export const getPostByTag = (tag: string) => API.get(`/post/?tag=${tag}`);
 export const getTags = () => API.get("/post/tags");
 
 export const createComment = (comment: string, postId: string) =>

@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Menu from "../components/home/Menu";
 import Post from "../components/home/Post";
 import Sidebar from "../components/home/Sidebar";
-import { getPost, getTags } from "../api";
+import { getPost, getTags, getPostByTag } from "../api";
 import { MdOutlineImageNotSupported } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 
 import { PostType } from "../type";
 
@@ -11,16 +12,23 @@ const Home = () => {
   const [postData, setPostData] = useState<PostType[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    getPost().then((res) => {
-      setPostData(res.data);
-    });
+    const tag = searchParams.get("tag");
+    if (tag) {
+      getPostByTag(tag).then((res) => {
+        setPostData(res.data);
+      });
+    } else {
+      getPost().then((res) => {
+        setPostData(res.data);
+      });
+    }
     getTags().then((res) => {
       setTags(res.data);
-      console.log("tag", res.data);
     });
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="flex justify-between lg:justify-center">
