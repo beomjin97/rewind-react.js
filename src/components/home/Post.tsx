@@ -32,32 +32,37 @@ const Post = ({ post }: Props) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    createComment(comment, post._id).then(() => {
-      alert("등록되었습니다.");
-      setComment("");
-    });
-  };
-
-  const handleClickLike = () => {
-    setLike((prev) => !prev);
-    if (post.like?.length === likeNum) {
-      setLikeNum((prev) => (prev += 1));
-    } else {
-      setLikeNum((prev) => (prev -= 1));
-    }
-    likePost(post._id).then((res) => console.log(res.data.message));
+    createComment(comment, post._id)
+      .then(() => {
+        alert("등록되었습니다.");
+        setComment("");
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   const handleLike = () => {
     setLike((prev) => !prev);
     setLikeNum((prev) => prev + 1);
-    likePost(post._id).then((res) => console.log(res.data.message));
+    likePost(post._id)
+      .then((res) => console.log(res.data.message))
+      .catch((err) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   const handleLikeCancel = () => {
     setLike((prev) => !prev);
     setLikeNum((prev) => prev - 1);
-    likePost(post._id).then((res) => console.log(res.data.message));
+    likePost(post._id)
+      .then((res) => console.log(res.data.message))
+      .catch((err) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   return (

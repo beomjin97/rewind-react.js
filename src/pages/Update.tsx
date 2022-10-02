@@ -42,8 +42,9 @@ const Update = () => {
       console.log(res.data);
       alert("수정 되었습니다.");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      alert(error.response.data.message);
+      navigate("/auth");
     }
   };
 

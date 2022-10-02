@@ -4,7 +4,6 @@ import SelectedPhoto from "../components/upload/SelectedPhoto";
 import { useNavigate } from "react-router-dom";
 
 import { createPost } from "../api";
-import ChipInput from "../components/upload/ChipInput";
 
 const Upload = () => {
   const [photos, setPhotos] = useState<string[]>([]);
@@ -41,8 +40,9 @@ const Upload = () => {
       console.log(res.data);
       alert("업로드 되었습니다.");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      alert(error.response.data.message);
+      navigate("/auth");
     }
   };
 
@@ -65,11 +65,11 @@ const Upload = () => {
     <>
       <div className="bg-[#FFFBFB] w-[80%] lg:w-[100%] mx-auto py-10 mt-10 mb-10">
         <div className="mx-auto w-[90%]">
-          <h1 className="font-bold text-4xl sm:text-center">Upload Post</h1>
+          <h1 className="text-4xl font-bold sm:text-center">Upload Post</h1>
           <h3 className="text-[#d9d9d9] sm:text-center">
             rewind your memory with <span className="text-primary">Rewind</span>
           </h3>
-          <div className=" sm:block flex mt-8 justify-between">
+          <div className="flex justify-between mt-8 sm:block">
             {photos.length === 0 ? (
               <InputFiles handleChange={handleChange} setPhotos={setPhotos} />
             ) : (
@@ -86,7 +86,7 @@ const Upload = () => {
             )}
             <div className="w-[40%] sm:w-[100%]">
               <div className="relative">
-                <div className="text-xl font-bold mb-2">
+                <div className="mb-2 text-xl font-bold">
                   Please add a content
                 </div>
                 <div className="absolute right-1 bottom-12">
@@ -102,7 +102,7 @@ const Upload = () => {
                   onChange={handleContent}
                 ></textarea>
               </div>
-              <div className="text-xl font-bold mb-2">Please add tags</div>
+              <div className="mb-2 text-xl font-bold">Please add tags</div>
               <div
                 className={`h-10 w-full mb-10 overflow-x-auto flex items-center scrollbar-hide border-[1px] border-[#00000030] ${
                   document.activeElement === chipInput.current &&

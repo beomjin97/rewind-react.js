@@ -27,3 +27,7 @@ export const followUser = (followingId: string) =>
   API.post(`/user/follow/${followingId}`);
 export const searchUser = (userName: string) =>
   API.get(`/search?user=${userName}`);
+
+export const verifyUser = () => API.post("/verify");
+// export const signIn
+// export const signUp

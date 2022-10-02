@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { userState } from "../../store";
 import { userType } from "../../type";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { followUser } from "../../api";
 
@@ -25,20 +25,21 @@ const Profile = ({
   const { _id } = useRecoilValue<userType>(userState);
   const { userId } = useParams();
   const ownPage: boolean = _id === userId;
-
+  const navigate = useNavigate();
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
   useEffect(() => {
     setIsFollowing(followers.filter((user) => user._id === _id).length > 0);
-  }, [followers, userId]);
+  }, [followers, userId, _id]);
 
   const handleClick = async () => {
     try {
       const res = await followUser(userId || "");
       alert(res.data.message);
       setIsFollowing((prev) => !prev);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      alert(error.response.data.message);
+      navigate("/auth");
     }
   };
 

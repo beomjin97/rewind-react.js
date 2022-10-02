@@ -1,5 +1,5 @@
 import { FiUpload } from "react-icons/fi";
-import { URLSearchParamsInit, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Profile from "../common/Profile";
 
 interface props {
@@ -34,7 +34,7 @@ const Sidebar = ({ isVisible, tags }: props) => {
         <div className="flex flex-wrap ">
           {tags.map((tag) => (
             <button
-              className="min-w-[80px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1"
+              className="min-w-[80px] h-[40px] border-primary border-2 rounded-[20px] text-[20px] text-center font-bold hover:bg-primary m-1 px-2"
               onClick={() => navigate(`/?tag=${tag}`)}
             >
               {`#${tag}`}

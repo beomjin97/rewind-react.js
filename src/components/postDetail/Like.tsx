@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import { likePost } from "../../api";
 
 interface Props {
@@ -12,16 +13,28 @@ const Like = ({ like, likeNum, postId }: Props) => {
   const [islike, setIslike] = useState<boolean>(like);
   const [likes, setLikes] = useState<number>(likeNum);
 
+  const navigate = useNavigate();
+
   const handleLike = () => {
     setIslike((prev) => !prev);
     setLikes((prev) => prev + 1);
-    likePost(postId).then((res) => console.log(res.data.message));
+    likePost(postId)
+      .then((res) => console.log(res.data.message))
+      .catch((err) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   const handleLikeCancel = () => {
     setIslike((prev) => !prev);
     setLikes((prev) => prev - 1);
-    likePost(postId).then((res) => console.log(res.data.message));
+    likePost(postId)
+      .then((res) => console.log(res.data.message))
+      .catch((err) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   return (

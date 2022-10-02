@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
-import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
@@ -10,7 +9,6 @@ import { userState } from "../../store";
 import { searchUser } from "../../api";
 
 const Header = () => {
-  const token = localStorage.getItem("token");
   const [userData, setUserData] = useRecoilState<userType>(userState);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const navigate = useNavigate();
@@ -29,15 +27,6 @@ const Header = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (token) {
-      const { userName, _id } = jwtDecode<userType>(token);
-      setUserData({ userName, _id });
-    } else {
-      navigate("/auth");
-    }
-  }, [token]);
 
   return (
     <div className="flex justify-between w-[100%] lg:h-12 h-[120px] items-center border-b-[1px] border-[#00000030] min-w-[310px] relative">

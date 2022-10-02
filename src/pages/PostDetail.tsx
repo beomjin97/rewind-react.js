@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { createComment, getPostById, deletePost, editPost } from "../api";
+import { createComment, getPostById, deletePost } from "../api";
 import { PostType } from "../type";
 import { MdOutlineCancel } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
@@ -32,11 +32,16 @@ const PostDetail = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    createComment(comment, post._id).then(() => {
-      alert("등록되었습니다.");
-      setComment("");
-      window.location.reload();
-    });
+    createComment(comment, post._id)
+      .then(() => {
+        alert("등록되었습니다.");
+        setComment("");
+        window.location.reload();
+      })
+      .catch((err: any) => {
+        alert(err.response.data.message);
+        navigate("/auth");
+      });
   };
 
   const deleteMyPost = async () => {
@@ -45,8 +50,9 @@ const PostDetail = () => {
         const res = await deletePost(postId || "");
         alert(res.data.message);
         navigate("/");
-      } catch (error) {
-        console.log(error);
+      } catch (err: any) {
+        alert(err.response.data.message);
+        navigate("/auth");
       }
     }
   };
