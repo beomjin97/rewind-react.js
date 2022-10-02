@@ -11,8 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { createComment, likePost } from "../../api";
 import { PostType } from "../../type";
 import { userState } from "../../store";
-import { BiWindows } from "react-icons/bi";
-import Like from "../postDetail/Like";
 
 interface Props {
   post: PostType;
